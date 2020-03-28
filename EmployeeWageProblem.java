@@ -3,11 +3,18 @@
 // Since 28 March 2020 
 
 public class EmployeeWageProblem{
-
-public static final int IS_FULLTIME=1, IS_PARTTIME=2, MAX_DAYS=20, WAGE_PER_HOUR=20, MAX_HOURS=100 ;
-
+int totalSalary=0;
 	public static void main ( String args[] ){
-		int totalSalary=0, salary=0, totalEmpHours=0, noOfDays=0;
+
+		EmployeeWageProblem employee= new EmployeeWageProblem();
+		employee.wageCalculation(20,20,100);
+}
+
+
+
+public void wageCalculation( int MAX_DAYS, int WAGE_PER_HOUR, int MAX_HOURS ) {
+	int salary=0, totalEmpHours=0, noOfDays=0;
+	final int IS_FULLTIME=1, IS_PARTTIME=2 ;
 
 		while ( totalEmpHours < MAX_HOURS && noOfDays < MAX_DAYS ){
 			int checkNumber=(int)(Math.floor(Math.random()*10)%3);
@@ -32,8 +39,7 @@ public static final int IS_FULLTIME=1, IS_PARTTIME=2, MAX_DAYS=20, WAGE_PER_HOUR
 			System.out.println("Salary of Employee on "+noOfDays+ "th Day is.."+salary);
 			totalSalary+=salary;
 		}
-		System.out.println("ToTal Salary of Employee is.."+ totalSalary);
-	}
-
+    System.out.println("ToTal Salary of Employee is.."+ totalSalary);
 }
 
+}
