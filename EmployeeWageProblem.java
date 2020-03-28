@@ -7,12 +7,14 @@ int totalSalary=0;
 	public static void main ( String args[] ){
 
 		EmployeeWageProblem employee= new EmployeeWageProblem();
-		employee.wageCalculation(20,20,100);
+		employee.wageCalculation("BMC",20,20,100);
+		employee.wageCalculation("TCS",25,30,90);
+
 }
 
 
 
-public void wageCalculation( int MAX_DAYS, int WAGE_PER_HOUR, int MAX_HOURS ) {
+public void wageCalculation( String cName,int MAX_DAYS, int WAGE_PER_HOUR, int MAX_HOURS ) {
 	int salary=0, totalEmpHours=0, noOfDays=0;
 	final int IS_FULLTIME=1, IS_PARTTIME=2 ;
 
@@ -39,7 +41,7 @@ public void wageCalculation( int MAX_DAYS, int WAGE_PER_HOUR, int MAX_HOURS ) {
 			System.out.println("Salary of Employee on "+noOfDays+ "th Day is.."+salary);
 			totalSalary+=salary;
 		}
-    System.out.println("ToTal Salary of Employee is.."+ totalSalary);
+    System.out.println("Company name is:: "+cName+" ToTal Salary of Employee is::"+ totalSalary);
 }
 
 }
