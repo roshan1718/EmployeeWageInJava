@@ -23,8 +23,7 @@ public static void main(String args[]){
 
 		maxHoursInMonth = (int) (100 + Math.random() * 200);
 		
-		company[i] = new EmployeeWage(wagePerHour, numWorkingDays,
-											 maxHoursInMonth);
+		company[i] = new EmployeeWage(wagePerHour, numWorkingDays,maxHoursInMonth);
 		wageCalculation(company[i], i);
 	}
 }
@@ -62,30 +61,30 @@ public static void wageCalculation(EmployeeWage company, int empNo) {
 
 
 class EmployeeWage{
-//CONSTANTS
-public static  int WAGE_PER_HOURS, NUM_WORKING_DAYS, MAX_HOURS_IN_MONTH;
+	//CONSTANTS
+	public static int WAGE_PER_HOURS, NUM_WORKING_DAYS, MAX_HOURS_IN_MONTH;
 
-//Variables
-static int totalWage=0;
+	//Variables
+	static int totalWage=0;
 
    public EmployeeWage( int NUM_WORKING_DAYS, int WAGE_PER_HOURS, int MAX_HOURS_IN_MONTH ){
 
-      //this.COMPANY = COMPANY;
-      this.NUM_WORKING_DAYS = NUM_WORKING_DAYS;
-      this.WAGE_PER_HOURS = WAGE_PER_HOURS;
-      this.MAX_HOURS_IN_MONTH = MAX_HOURS_IN_MONTH;
-   }
+		//this.COMPANY = COMPANY;
+		this.NUM_WORKING_DAYS = NUM_WORKING_DAYS;
+		this.WAGE_PER_HOURS = WAGE_PER_HOURS;
+		this.MAX_HOURS_IN_MONTH = MAX_HOURS_IN_MONTH;
+	}
 
 	public int getWagePerHour() {
-	return WAGE_PER_HOURS;
+		return WAGE_PER_HOURS;
 	}
 
 	public int getNumWorkingDays() {
-	return NUM_WORKING_DAYS;
+		return NUM_WORKING_DAYS;
 	}
 
 	public int getMaxHoursInMonth() {
-	return MAX_HOURS_IN_MONTH;
+		return MAX_HOURS_IN_MONTH;
 	}
 
 	public void setTotalWage(int totalWage) {
