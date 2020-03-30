@@ -3,91 +3,102 @@
 // Since 28 March 2020 
 
 import java.util.Scanner;
-public class EmployeeWageProblem{
-//CONSTANTS
-public static final int IS_FULLTIME=1, IS_PARTTIME=2;
-//variables
-public static  int wagePerHour, numWorkingDays, maxHoursInMonth;
-static int totalWage=0;
-
-public static void main(String args[]){
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter the Total companies");
-	int totalCompany= sc.nextInt();
-	EmployeeWage company[] = new EmployeeWage[totalCompany];
-	for (int i = 0; i < totalCompany; i++) {
-		
-		wagePerHour = (int) (100 + Math.random() * 300);
-
-		numWorkingDays = (int) (20 + Math.random() * 25);
-
-		maxHoursInMonth = (int) (100 + Math.random() * 200);
-		
-		company[i] = new EmployeeWage(wagePerHour, numWorkingDays,maxHoursInMonth);
-		wageCalculation(company[i], i);
-	}
+interface Camputation {
+	void calculateWage();
 }
 
-public static void wageCalculation(EmployeeWage company, int empNo) {
-	int salary=0, totalEmpHours=0, totalWorkingDays=0 ,totalWage=0;
-	while ( totalEmpHours <= company.getMaxHoursInMonth() && totalWorkingDays< company.getNumWorkingDays()){
-		int checkNumber=(int)(Math.floor(Math.random()*10)%3);
-		int empHours=0;
-		totalWorkingDays+=1;
-		switch (checkNumber){
-			case IS_FULLTIME:
-				//System.out.println("Employee Is Full Time..!");
-				empHours=8;
-				break;
-			case IS_PARTTIME:
-				//System.out.println("Employee Is Part Time..!");
-				empHours=4;
-				break;
-			default:
-				//System.out.println("Employee Is Absent..");
-				empHours=0;
-				break;
-			}
-		salary=empHours*company.getWagePerHour();
-		totalEmpHours+=empHours;
-		//System.out.println("Salary of Employee on "+noOfDays+ "th Day is.."+salary);
-		totalWage+=salary;
-	}
-	company.setTotalWage(totalWage);
-	System.out.println("ToTal Salary of Employee-" +(empNo + 1)+ " is::"+ totalWage);
-}
+public class EmployeeWageProblem implements Camputation{
 
-}
-
-
-class EmployeeWage{
 	//CONSTANTS
-	public static int WAGE_PER_HOURS, NUM_WORKING_DAYS, MAX_HOURS_IN_MONTH;
+	private static final int IS_FULL_TIME = 1, IS_PART_TIME = 2;
+	private final int TOTAL_COMPANIES;
 
 	//Variables
-	static int totalWage=0;
+	private static int empRatePerHour = 0, numWorkingDays = 0;
+	private static int maxHrsInMonth = 0;
+	CompanyEmpWage employee[];
 
-   public EmployeeWage( int NUM_WORKING_DAYS, int WAGE_PER_HOURS, int MAX_HOURS_IN_MONTH ){
+	public EmployeeWageProblem(int totalCompanies) {
 
-		this.NUM_WORKING_DAYS = NUM_WORKING_DAYS;
-		this.WAGE_PER_HOURS = WAGE_PER_HOURS;
-		this.MAX_HOURS_IN_MONTH = MAX_HOURS_IN_MONTH;
+		this.TOTAL_COMPANIES = totalCompanies;
+		this.employee = new CompanyEmpWage [this.TOTAL_COMPANIES];
 	}
 
-	public int getWagePerHour() {
-		return WAGE_PER_HOURS;
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the Total companies");
+		int totalCompany= sc.nextInt();
+		EmployeeWageProblem company = new EmployeeWageProblem(totalCompany);
+		for (int i = 0; i < company.employee.length; i++) {
+
+			empRatePerHour = (int) (100 + Math.random() * 200);
+			numWorkingDays = (int) (20 + Math.random() * 25);
+			maxHrsInMonth = (int) (100 + Math.random() * 200);
+
+			company.employee[i] = new CompanyEmpWage(empRatePerHour,numWorkingDays, maxHrsInMonth);
+		}
+		company.calculateWage();
+	}
+
+public void calculateWage() {
+
+	for(int empNo = 0; empNo < employee.length; empNo++){
+		int empHrs = 0, empWage = 0, totalEmpWage = 0;
+		int totalWorkingDays = 0, totalEmpHrs = 0;
+		//Computation
+		while (totalEmpHrs <= employee[empNo].getMaxHrsInMonth() &&
+				totalWorkingDays < employee[empNo].getNumWorkingDays()) {
+			totalWorkingDays++;
+			int empChoice = ((int) Math.floor(Math.random() * 10)) % 3;
+			switch(empChoice) {
+				case IS_FULL_TIME:
+					empHrs = 8;
+					break;
+				case IS_PART_TIME:
+					empHrs = 4;
+					break;
+				default:
+					empHrs = 0;
+			}
+			totalEmpHrs += empHrs;
+			empWage = empHrs * employee[empNo].getEmpRatePerHour();
+			totalEmpWage += empWage;
+		}
+		employee[empNo].setTotalEmpWage(totalEmpWage);
+		System.out.println("Monthly Salary of employee " + (empNo + 1) + ":" + totalEmpWage);
+	}
+}
+}
+
+class CompanyEmpWage{
+
+	//CONSTANTS
+	private final int EMP_RATE_PER_HOUR, NUM_WORKING_DAYS;
+	private final int MAX_HOURS_IN_MONTH;
+
+	//Variables
+	private int totalEmpWage = 0;
+	public CompanyEmpWage(int empRatePerHour,int numWorkingDays,int maxHrsInMonth) {
+
+		this.EMP_RATE_PER_HOUR = empRatePerHour;
+		this.NUM_WORKING_DAYS = numWorkingDays;
+		this.MAX_HOURS_IN_MONTH = maxHrsInMonth;
+	}
+
+	public int getEmpRatePerHour() {
+		return EMP_RATE_PER_HOUR;
 	}
 
 	public int getNumWorkingDays() {
 		return NUM_WORKING_DAYS;
 	}
 
-	public int getMaxHoursInMonth() {
+	public int getMaxHrsInMonth() {
 		return MAX_HOURS_IN_MONTH;
 	}
 
-	public void setTotalWage(int totalWage) {
-		this.totalWage = totalWage;
+	public void setTotalEmpWage(int totalEmpWage) {
+		this.totalEmpWage = totalEmpWage;
 	}
-}
 
+}
