@@ -35,27 +35,27 @@ public static void wageCalculation(EmployeeWage company, int empNo) {
 		int empHours=0;
 		totalWorkingDays+=1;
 		switch (checkNumber){
-				case IS_FULLTIME:
-					//System.out.println("Employee Is Full Time..!");
-					empHours=8;
-					break;
-				case IS_PARTTIME:
-					//System.out.println("Employee Is Part Time..!");
-					empHours=4;
-					break;
-				default:
-					//System.out.println("Employee Is Absent..");
-					empHours=0;
-					break;
+			case IS_FULLTIME:
+				//System.out.println("Employee Is Full Time..!");
+				empHours=8;
+				break;
+			case IS_PARTTIME:
+				//System.out.println("Employee Is Part Time..!");
+				empHours=4;
+				break;
+			default:
+				//System.out.println("Employee Is Absent..");
+				empHours=0;
+				break;
 			}
-			salary=empHours*company.getWagePerHour();
-			totalEmpHours+=empHours;
-			//System.out.println("Salary of Employee on "+noOfDays+ "th Day is.."+salary);
-			totalWage+=salary;
-		}
-		company.setTotalWage(totalWage);
-		System.out.println("ToTal Salary of Employee-" +(empNo + 1)+ " is::"+ totalWage);
+		salary=empHours*company.getWagePerHour();
+		totalEmpHours+=empHours;
+		//System.out.println("Salary of Employee on "+noOfDays+ "th Day is.."+salary);
+		totalWage+=salary;
 	}
+	company.setTotalWage(totalWage);
+	System.out.println("ToTal Salary of Employee-" +(empNo + 1)+ " is::"+ totalWage);
+}
 
 }
 
@@ -69,7 +69,6 @@ class EmployeeWage{
 
    public EmployeeWage( int NUM_WORKING_DAYS, int WAGE_PER_HOURS, int MAX_HOURS_IN_MONTH ){
 
-		//this.COMPANY = COMPANY;
 		this.NUM_WORKING_DAYS = NUM_WORKING_DAYS;
 		this.WAGE_PER_HOURS = WAGE_PER_HOURS;
 		this.MAX_HOURS_IN_MONTH = MAX_HOURS_IN_MONTH;
