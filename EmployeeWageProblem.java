@@ -1,7 +1,7 @@
 // Description : Employee Wage Problem
 // Author : Roshan Balkrushna Shinde
 // Since 28 March 2020 
-
+import java.util.*;
 import java.util.Scanner;
 interface Camputation {
 	void calculateWage();
@@ -11,43 +11,38 @@ public class EmployeeWageProblem implements Camputation{
 
 	//CONSTANTS
 	private static final int IS_FULL_TIME = 1, IS_PART_TIME = 2;
-	private final int TOTAL_COMPANIES;
-
+	
 	//Variables
 	private static int empRatePerHour = 0, numWorkingDays = 0;
 	private static int maxHrsInMonth = 0;
-	CompanyEmpWage employee[];
+	ArrayList <CompanyEmpWage> employee = new ArrayList<CompanyEmpWage>();
 
-	public EmployeeWageProblem(int totalCompanies) {
-
-		this.TOTAL_COMPANIES = totalCompanies;
-		this.employee = new CompanyEmpWage [this.TOTAL_COMPANIES];
-	}
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the Total companies");
 		int totalCompany= sc.nextInt();
-		EmployeeWageProblem company = new EmployeeWageProblem(totalCompany);
-		for (int i = 0; i < company.employee.length; i++) {
+		EmployeeWageProblem company = new EmployeeWageProblem();
+		while (totalCompany != 0) {
 
 			empRatePerHour = (int) (100 + Math.random() * 200);
 			numWorkingDays = (int) (20 + Math.random() * 25);
 			maxHrsInMonth = (int) (100 + Math.random() * 200);
 
-			company.employee[i] = new CompanyEmpWage(empRatePerHour,numWorkingDays, maxHrsInMonth);
+			company.employee.add(new CompanyEmpWage(empRatePerHour,numWorkingDays, maxHrsInMonth));
+			totalCompany--;
 		}
 		company.calculateWage();
 	}
 
 public void calculateWage() {
-
-	for(int empNo = 0; empNo < employee.length; empNo++){
+	int empNo= 1;
+	for(CompanyEmpWage emp :employee){
 		int empHrs = 0, empWage = 0, totalEmpWage = 0;
 		int totalWorkingDays = 0, totalEmpHrs = 0;
-		//Computation
-		while (totalEmpHrs <= employee[empNo].getMaxHrsInMonth() &&
-				totalWorkingDays < employee[empNo].getNumWorkingDays()) {
+		//Computation Logic
+		while (totalEmpHrs <= emp.getMaxHrsInMonth() &&
+				totalWorkingDays < emp.getNumWorkingDays()) {
 			totalWorkingDays++;
 			int empChoice = ((int) Math.floor(Math.random() * 10)) % 3;
 			switch(empChoice) {
@@ -61,13 +56,14 @@ public void calculateWage() {
 					empHrs = 0;
 			}
 			totalEmpHrs += empHrs;
-			empWage = empHrs * employee[empNo].getEmpRatePerHour();
+			empWage = empHrs * emp.getEmpRatePerHour();
 			totalEmpWage += empWage;
 		}
-		employee[empNo].setTotalEmpWage(totalEmpWage);
-		System.out.println("Monthly Salary of employee " + (empNo + 1) + ":" + totalEmpWage);
+		emp.setTotalEmpWage(totalEmpWage);
+		System.out.println("Monthly Salary of employee " + (empNo) + ":" + totalEmpWage);
+		empNo++;
+		}
 	}
-}
 }
 
 class CompanyEmpWage{
