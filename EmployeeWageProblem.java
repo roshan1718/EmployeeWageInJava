@@ -3,6 +3,7 @@
 // Since 28 March 2020 
 import java.util.*;
 import java.util.Scanner;
+
 interface Camputation {
 	void calculateWage();
 }
@@ -38,6 +39,7 @@ public class EmployeeWageProblem implements Camputation{
 public void calculateWage() {
 	int empNo= 1;
 	for(CompanyEmpWage emp :employee){
+		System.out.println("Daily wage of employee" + empNo);
 		int empHrs = 0, empWage = 0, totalEmpWage = 0;
 		int totalWorkingDays = 0, totalEmpHrs = 0;
 		//Computation Logic
@@ -58,6 +60,7 @@ public void calculateWage() {
 			totalEmpHrs += empHrs;
 			empWage = empHrs * emp.getEmpRatePerHour();
 			totalEmpWage += empWage;
+			System.out.println("Day"+ totalWorkingDays+ "::"+empWage);
 		}
 		emp.setTotalEmpWage(totalEmpWage);
 		System.out.println("Monthly Salary of employee " + (empNo) + ":" + totalEmpWage);
@@ -71,7 +74,7 @@ class CompanyEmpWage{
 	//CONSTANTS
 	private final int EMP_RATE_PER_HOUR, NUM_WORKING_DAYS;
 	private final int MAX_HOURS_IN_MONTH;
-
+	private ArrayList<Integer> dailyWages = new ArrayList <Integer>();
 	//Variables
 	private int totalEmpWage = 0;
 	public CompanyEmpWage(int empRatePerHour,int numWorkingDays,int maxHrsInMonth) {
@@ -95,6 +98,10 @@ class CompanyEmpWage{
 
 	public void setTotalEmpWage(int totalEmpWage) {
 		this.totalEmpWage = totalEmpWage;
+	}
+	
+	public void addDailyWage(int wage){
+		dailyWages.add(wage);
 	}
 
 }
