@@ -12,7 +12,7 @@ public class EmployeeWageProblem implements Camputation{
 
 	//CONSTANTS
 	private static final int IS_FULL_TIME = 1, IS_PART_TIME = 2;
-	
+	public static int totalCompany=10;
 	//Variables
 	private static int empRatePerHour = 0, numWorkingDays = 0;
 	private static int maxHrsInMonth = 0;
@@ -20,9 +20,7 @@ public class EmployeeWageProblem implements Camputation{
 
 
 	public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the Total companies");
-		int totalCompany= sc.nextInt();
+
 		EmployeeWageProblem company = new EmployeeWageProblem();
 		while (totalCompany != 0) {
 
@@ -34,7 +32,26 @@ public class EmployeeWageProblem implements Camputation{
 			totalCompany--;
 		}
 		company.calculateWage();
+		company.displayCompWage();
+
 	}
+
+public void  displayCompWage(){
+	int empNo ,totalCompany=10;
+	while (true) {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter company number to get total wage: ");
+		empNo = sc.nextInt();
+	 	if (empNo > 0 && empNo <= totalCompany) {
+			System.out.print("Total wage of employee = ");
+			System.out.println(employee.get(empNo - 1).getTotalEmpWage());
+			break;
+		}
+		else
+			System.out.println("Invalid employee number");
+	}
+}
+
 
 public void calculateWage() {
 	int empNo= 1;
@@ -102,6 +119,10 @@ class CompanyEmpWage{
 	
 	public void addDailyWage(int wage){
 		dailyWages.add(wage);
+	}
+	
+	public int getTotalEmpWage(){
+		return totalEmpWage;
 	}
 
 }
